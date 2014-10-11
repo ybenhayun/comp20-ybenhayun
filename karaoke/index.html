@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Daydream Believer</title>
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+<h1 id="title">Daydream Believer</h1>
+
+<video src="http://www.cs.tufts.edu/comp/20/daydream_believer.webm" id="music_video" controls></video>
+<div id="lyrics"></div>
+
+<script>
+var vid = document.getElementById("music_video");
+var stanza1 = "Oh, I could hide 'neath the wings<br>\
+	Of the bluebird as she sings<br>\
+	The six o'clock alarm would never ring.<br>\
+	But it rings and I rise,<br>\
+	Wipe the sleep out of my eyes.<br>\
+	My shavin' razor's cold and it stings.";
+
+var stanza2 = "Cheer up, Sleepy Jean.<br>\
+	Oh, what can it mean.<br>\
+	To a daydream believer<br>\
+	And a homecoming queen.";
+
+var stanza3 = "You once thought of me<br>\
+	As a white knight on a steed.<br>\
+	Now you know how happy I can be.<br>\
+	Oh, and our good times start and end<br>\
+	Without dollar one to spend.<br>\
+	But how much, baby, do we really need.";
+
+var stanza4 = "Cheer up, Sleepy Jean.<br>\
+	Oh, what can it mean.<br>\
+	To a daydream believer<br>\
+	And a homecoming queen.<br>\
+	Cheer up, Sleepy Jean.<br>\
+	Oh, what can it mean.<br>\
+	To a daydream believer<br>\
+	And a homecoming queen.";
+
+var stanza5 = "Cheer up, Sleepy Jean.<br>\
+	Oh, what can it mean.<br>\
+	To a daydream believer<br>\
+	And a homecoming queen.<br>\
+	[Repeat and fade]"
+
+var annotate = function(){
+	if (vid.currentTime >= 6)	
+		document.getElementById("lyrics").innerHTML = stanza1 + "<img src = 'puppy.jpg'>";
+	if (vid.currentTime >= 38)
+		document.getElementById("lyrics").innerHTML = stanza2;
+	if (vid.currentTime >= 55)
+		document.getElementById("lyrics").innerHTML = stanza3;
+	if (vid.currentTime >= 85)
+		document.getElementById("lyrics").innerHTML = stanza4;
+	if (vid.currentTime >= 120)
+		document.getElementById("lyrics").innerHTML = "[Instrumental interlude] <img src = 'mustache.jpeg'>";
+	if (vid.currentTime >= 127)
+		document.getElementById("lyrics").innerHTML = stanza5;
+}
+
+vid.addEventListener('timeupdate', annotate, false);
+</script>
+
+</body>
+</html>	
