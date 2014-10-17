@@ -23,6 +23,19 @@
       google.maps.event.addDomListener(window, 'load', initialize);
     </script>
 
+    <script>
+      function loadXMLDoc(){
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange=function(){
+          if (xmlhttp.readyState==4 && xmlhttp.status==200){
+           document.getElementById("map-canvas").innerHTML=xmlhttp.responseText;
+          }
+        }
+        xmlhttp.open("GET","http://developer.mbta.com/lib/rthr/red.json",true);
+        xmlhttp.send();
+      }
+    </script>
+
   </head>
 
   <body>
