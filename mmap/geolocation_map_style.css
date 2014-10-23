@@ -1,4 +1,12 @@
 #map_canvas {
-	width: 100%;
+	width: 90%;
 	height: 100%;
+}
+
+html {
+	font-family: arial;
+}
+
+body {
+	background-color: gray;
 }
