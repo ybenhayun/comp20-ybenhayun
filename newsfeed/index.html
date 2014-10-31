@@ -11,14 +11,14 @@
 		$('#msg').keypress(function(event){
 			var keycode = (event.keyCode ? event.keyCode : event.which);
 			if(keycode == '13'){   //checks if status was updated
-			var txt = $('#msg')[0].value;
-			var time = new Date();
-			localStorage[time] = time.getMonth()+1 + "/" + time.getUTCDate() + "/" + time.getFullYear() + " " + time.getHours() + ":" + time.getMinutes() + ":" + time.getSeconds() + " - " + txt;
-			var output = "";
-			news = $('#news')[0];
-			for (key in localStorage){
-			output = localStorage[key] +"<p>" + output + "</p>\n";
-			}	
+				var txt = $('#msg')[0].value;
+				var time = new Date();
+				localStorage[time] = time.getMonth()+1 + "/" + time.getUTCDate() + "/" + time.getFullYear() + " " + time.getHours() + ":" + time.getMinutes() + ":" + time.getSeconds() + " - " + txt;
+				var output = "";
+				news = $('#news')[0];
+				for (key in localStorage){
+				output = localStorage[key] +"<p>" + output + "</p>\n";
+				}	
 			news.innerHTML = output;
 			}
 		});
