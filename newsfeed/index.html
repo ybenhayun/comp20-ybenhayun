@@ -6,17 +6,18 @@
 	<title>My News Feed </title>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 	<script>
+	//localStorage.clear();   //<---clears local storage if necessary
 $(document).ready(function(){
 	$('#msg').keypress(function(event){
 		var keycode = (event.keyCode ? event.keyCode : event.which);
-		if(keycode == '13'){
-		txt = $('#msg')[0].value;
-		time = new Date();
-		localStorage[time] = txt;
-		output = "";
+		if(keycode == '13'){   //checks if status was updated
+		var txt = $('#msg')[0].value;
+		var time = new Date();
+		localStorage[time] = time.getMonth()+1 + "/" + time.getUTCDate() + "/" + time.getFullYear() + " " + time.getHours() + ":" + time.getMinutes() + ":" + time.getSeconds() + " - " + txt;
+		var output = "";
 		news = $('#news')[0];
 		for (key in localStorage){
-		output = time.getMonth()+1 + "/" + time.getUTCDate() + "/" + time.getFullYear() + " " + time.getHours() + ":" + time.getMinutes() + ":" + time.getSeconds() + " - " + localStorage[key] +"<p>" + output + "</p>\n";
+		output = localStorage[key] +"<p>" + output + "</p>\n";
 		}	
 		news.innerHTML = output;
 		}
