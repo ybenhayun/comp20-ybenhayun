@@ -16,7 +16,7 @@ $(document).ready(function(){
 		output = "";
 		news = $('#news')[0];
 		for (key in localStorage){
-		output = time.getMonth()+1 + "/" + time.getDay() + localStorage[key] +"<p>" + output + "</p>\n";
+		output = time.getMonth()+1 + "/" + time.getUTCDate() + "/" + time.getFullYear() + " " + time.getHours() + ":" + time.getMinutes() + ":" + time.getSeconds() + " - " + localStorage[key] +"<p>" + output + "</p>\n";
 		}	
 		news.innerHTML = output;
 		}
