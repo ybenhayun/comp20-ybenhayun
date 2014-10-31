@@ -3,16 +3,32 @@
 <html>
 
 <head>
-	<title>My News Feed</title>
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<title>My News Feed </title>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 	<script>
-	  // Most of your work will be done here...
+$(document).ready(function(){
+	$('#msg').keypress(function(event){
+		var keycode = (event.keyCode ? event.keyCode : event.which);
+		if(keycode == '13'){
+		txt = $('#msg')[0].value;
+		time = new Date();
+		localStorage[time] = txt;
+		output = "";
+		news = $('#news')[0];
+		for (key in localStorage){
+		output = time.getMonth()+1 + "/" + time.getDay() + localStorage[key] +"<p>" + output + "</p>\n";
+		}	
+		news.innerHTML = output;
+		}
+	});
+});
+
 	</script>
 </head>
 
 <body>
 	<h1>My News Feed</h1>
-	<h3>My news update: <input type="text" id="msg" name="msg" size="30" /></h3>
+	<h3>My news update: <input type="text" id="msg" name="msg" size="30" onchange = "store()"/></h3>
 	<div id="news">News...</div>
 </body>
 </html>
