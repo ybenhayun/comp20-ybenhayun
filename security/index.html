@@ -14,10 +14,10 @@
 	<p>In this report, I have detailed out four of the security issues that I have found in my partner's web application.</p>
 
 	<h5>2) Methodology</h5>
-	<p></p>
+	<p>I found all errors that existed in my partner's code by using curl, and by testing his heroku app locally. With these methods I managed to find several issues. </p>
 
 	<h5>3) Abstract Findings</h5>
-	<p></p>
+	<p>The issues that I found were as follows: the web application did not try to validate your location, so you could put yourself anywhere else in the world, it also failed to protect the privacy of other users so you could see everyone else's information, certain hacks would also cause the heroku app to redirect to random webpages, and the database could have easily been overflowed if it was given too much information.</p>
 
 	<h5>4) Issues Founds</h5>
 	<p> a) Isssue
@@ -29,7 +29,7 @@
 		</p>
 
 	<h5>5) Conclusion</h5>
-	<p></p>
+	<p>Here, we can see some of the problems that exist with my partner's code. Some things to take into consideration for future projects: location validation, privacy of other users, domain name sustainability (ie. doesn't redirect you to other pages if a user's name was web link), and limiting the size of the mongo database.</p>
 
 </body>
 </html>
