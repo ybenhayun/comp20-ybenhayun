@@ -1,0 +1,1 @@
+This is the readme file for assignment 4, security, in comp 20. All aspects of the project has been implmeneted correctly, this work is entirely my own, and I spent somewhere around 3-5. hours on the project as a whole.
