@@ -112,7 +112,7 @@
            document.getElementById("map-canvas").innerHTML=xmlhttp.responseText;
           }
         }
-        xmlhttp.open("POST","http://chickenofthesea.herokuapp.com/sendLocation",true);
+        xmlhttp.open("POST","https://shielded-temple-1577.herokuapp.com/",true);
         xmlhttp.send();
         JSON.parse(xmlhttp.responseText);
 
