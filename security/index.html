@@ -8,28 +8,56 @@
 
 <body>
 
-	<h5>1) Introduction</h5>
-	<p> This assesment tests the security of the whereintheworld web application devloped by <a> @yzhang </a> for Comp 20 Assignment 4. This assignment was to act as the server for our Marauder's Map assignment, so it would store the lattitude and longitude of users after they sent their lattitude and longitude to the server, and would give you the option to see all of the location checkins for a specific user. But vulnerabilities and security issues exist in the web application that make it not quite ready for public use. </p>
+	<h3>1) Introduction</h3>
+	<p> This assesment tests the security of the whereintheworld web application devloped by <a href = http://richardzyx.github.io/> @richardzyx </a> for Comp 20 Assignment 4. This assignment was to act as the server for our Marauder's Map assignment, so it would store the lattitude and longitude of users after they sent their lattitude and longitude to the server, and would give you the option to see all of the location checkins for a specific user. But vulnerabilities and security issues exist in the web application that make it not quite ready for public use. </p>
 
 	<p>In this report, I have detailed out four of the security issues that I have found in my partner's web application.</p>
 
-	<h5>2) Methodology</h5>
+	<h3>2) Methodology</h3>
 	<p>I found all errors that existed in my partner's code by using curl, and by testing his heroku app locally. With these methods I managed to find several issues. </p>
 
-	<h5>3) Abstract Findings</h5>
-	<p>The issues that I found were as follows: the web application did not try to validate your location, so you could put yourself anywhere else in the world, it also failed to protect the privacy of other users so you could see everyone else's information, certain hacks would also cause the heroku app to redirect to random webpages, and the database could have easily been overflowed if it was given too much information.</p>
+	<h3>3) Abstract Findings</h3>
+	<p>The issues that I found were as follows: the web application did not try to validate your location, so you could put yourself anywhere else in the world, it also failed to protect the privacy of other users so you could see everyone else's information, certain hacks would also allow the hacker to completely reconfigure the web application, and the database could have easily been overflooded if it was given too much information.</p>
 
-	<h5>4) Issues Founds</h5>
-	<p> a) Isssue
-		b) Location
-		c) Severity of Issue
-		d) Description of Issue
-		e) Proof of Vulnerability
-		f) Resolution			
-		</p>
+	<h3>4) Issues Founds</h3>
+	<h4> a) Returned Extra Logins (Privacy)</h4>
+	<p>
+		<li>Affects: User Privacy</li>
+		<li>Location: GET /locations.json</li>
+		<li>Severity: HIGH. Allows anyone to see the location checkin for all other users, so it's a very large security issue. This was you can see every single person that sent a checkin to the heroku app.</li>
+		<li>Method: This can be found by going <a href = "https://damp-citadel-9726.herokuapp.com/locations.json?login[$ne]=yzhang"> here. </a> Typically, locations.json is supposed to return the checkin history for a certain user, but typing in [$ne] will retrun the checkin information for everyone who isn't that user.</li>
+		<img src = "issue1.png" alt = "issue 1" height = "150" width = "900">
+		<li>Resolution: This can be resolved by character stripping in the locations.json. If he were to check for "[$ne]" and return an empty object in those instances, the web application wouldn't return the information of the other users.</li></p>
 
-	<h5>5) Conclusion</h5>
-	<p>Here, we can see some of the problems that exist with my partner's code. Some things to take into consideration for future projects: location validation, privacy of other users, domain name sustainability (ie. doesn't redirect you to other pages if a user's name was web link), and limiting the size of the mongo database.</p>
+	<h4> b) Falsifying Data </h4>
+	<p>
+		<li>Affects: Accuracy of Stored Data</li>
+		<li>Location: POST /sendLocation</li>
+		<li>Severity: Medium to high. Can result in users sending you completely false information that is then stored and perceived to be accurate data when it is not.</li>
+		<li>Method: Can be found by using <code>curl --data</code> with any lattitude and longitude that you so desire.</li>
+		<img src = "issue2.png" alt = "issue 2" height = "100" width = "900">
+		<li>The above lattitude and longitude states that I was recently at the Eiffel Tower. </li>
+		<li>Resolution: This issue can be resolved by validating the lattitude and longitude via the IP address, and comparing it to the data that was sent. If the difference is incredibly large, then the information must be false.</li></p>
+
+	<h4> c) Cross Site Scripting </h4>
+	<p>
+		<li>Affects: The Web Application itself </li>
+		<li>Location: PoST /sendLocation </li>
+		<li>Severity: HIGH. Can result in the users sending in functions that could redirect the client to a different web page, edit the HTML itself, or completely tear apart the heroku app. </li>
+		<li>Method: I used the javascript alert function so a popup box would load everytime the heroku app was opened.</li>
+		<img src = "issue3.png" alt = "issue 3" height = "150" width = "600">
+		<li>Resoultion: This issue can be resolved either by character stripping the login (checking for any script tags), or by using regular expressions. Either of these methods would reject the faulty login as an attempt to hack into the web page.</li></p>
+	<h4> d) Overloading Their MongoDB</h4>
+	<p>
+		<li>Affects: The Web Application itself</li>
+		<li>Severity: Medium to high. If the database is completely overloaded, the web application could completely crash as a result. Otherwise, it could be completely filled with useless information, even if it does not crash.</li>
+		<li>Method: I used an infinite loop on the command line, using <code>while true; do; curl --data "login=Complete Garbage&lat=bad&lng=bad" https://damp-citadel-9726.herokuapp.com/sendLocation</code> </li>
+		<img src = "issue4.png" alt = "issue 4" height = "150" width = "600">
+		<li>Resolution: This issue can be resolved by using collection.limit() function, limiting the amount of possible entries to a sizable value, say 100. This way the document couldn't be overflooded and the application would not crash.</li>
+	</p>
+
+	<h3>5) Conclusion</h3>
+	<p>Here, we can see some of the problems that exist with my partner's code. Some things to take into consideration for future projects: location validation, privacy of other users, checking for faulty logins, and limiting the size of the mongo database.</p>
 
 </body>
 </html>
